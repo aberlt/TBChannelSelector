@@ -75,28 +75,11 @@ const static CGFloat kOtherHeaderHeight = 15.f;
 }
 
 - (void)configNavgationV {
-    CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-    UIView *nav = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), statusBarHeight + 44)];
-    nav.backgroundColor = TBCOLOR(246.f, 78.f, 69.f);
-    
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 44, statusBarHeight, 44, 44)];
-    closeBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    [closeBtn setImage:[UIImage imageNamed:@"nav_whiteClose"] forState:UIControlStateNormal];
-    [closeBtn addTarget:self action:@selector(closeBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
-    [nav addSubview:closeBtn];
-    
-    UILabel *titleLbl = [[UILabel alloc] init];
-    titleLbl.text = @"频道管理";
-    titleLbl.font = [UIFont systemFontOfSize:16];
-    [titleLbl sizeToFit];
-    titleLbl.center = CGPointMake(CGRectGetWidth(nav.bounds) * 0.5, closeBtn.center.y);
-    
-    [nav addSubview:titleLbl];
-    [self.view addSubview:nav];
-    self.navgationV = nav;
+    self.title = @"频道管理";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"close_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(closeBtnDidClick:)];
 }
 
-- (void)closeBtnDidClick:(UIButton *)btn {
+- (void)closeBtnDidClick:(UIBarButtonItem *)item {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
